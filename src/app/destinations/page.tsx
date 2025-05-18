@@ -15,8 +15,8 @@ export const metadata: Metadata = {
 
 export default function Destinations() {
   const destinationsList = Object.entries(destinations).map(([id, destination]) => ({
-    id: parseInt(id),
-    ...destination,
+    id,
+    ...destination
   }))
 
   return (
@@ -57,43 +57,33 @@ export default function Destinations() {
       {/* Destinations Grid */}
       <section className="py-20">
         <div className="container mx-auto px-4">
+          <h1 className="text-4xl font-playfair mb-8">Explore Destinations</h1>
+          
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {destinationsList.map((destination) => (
               <Link
                 key={destination.id}
                 href={`/destinations/${destination.id}`}
-                className="group block bg-white rounded-lg overflow-hidden shadow-lg hover:shadow-xl transition-shadow"
+                className="group"
               >
-                <div className="relative h-64">
-                  <Image
-                    src={destination.image}
-                    alt={destination.title}
-                    fill
-                    className="object-cover group-hover:scale-105 transition-transform duration-300"
-                  />
-                  <div className="absolute inset-0 bg-black opacity-20 group-hover:opacity-30 transition-opacity" />
-                </div>
-                <div className="p-6">
-                  <span className="font-montserrat inline-block bg-blue-100 text-blue-800 text-sm px-3 py-1 rounded-full mb-4">
-                    {destination.category}
-                  </span>
-                  <h2 className="font-playfair text-2xl font-bold mb-3 group-hover:text-blue-600 transition-colors">
-                    {destination.title}
-                  </h2>
-                  <p className="font-montserrat text-gray-600 mb-4">
-                    {destination.description}
-                  </p>
-                  <div className="font-montserrat text-sm text-gray-500">
-                    <p>Best Time to Visit: {destination.bestTimeToVisit}</p>
-                    <div className="mt-2 flex flex-wrap gap-2">
-                      {destination.localCuisine.slice(0, 3).map((cuisine) => (
-                        <span
-                          key={cuisine}
-                          className="bg-gray-100 text-gray-600 px-2 py-1 rounded-full text-xs"
-                        >
-                          {cuisine}
-                        </span>
-                      ))}
+                <div className="bg-white rounded-lg shadow-md overflow-hidden transition-transform group-hover:scale-105">
+                  <div className="relative h-48">
+                    <Image
+                      src={destination.image}
+                      alt={destination.title}
+                      fill
+                      className="object-cover"
+                    />
+                  </div>
+                  <div className="p-6">
+                    <h3 className="text-xl font-playfair mb-2">
+                      {destination.title}
+                    </h3>
+                    <p className="text-gray-600 mb-4">{destination.description}</p>
+                    <div className="flex flex-wrap gap-2">
+                      <span className="inline-block bg-primary/10 text-primary px-3 py-1 rounded-full text-sm">
+                        {destination.category}
+                      </span>
                     </div>
                   </div>
                 </div>

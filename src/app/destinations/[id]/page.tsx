@@ -5,41 +5,33 @@ import { Metadata } from 'next'
 import { destinations } from '@/data/destinations'
 import { createElement } from 'react'
 
-type Props = {
+interface Props {
   params: { id: string }
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
-  const id = parseInt(params.id)
-  const destination = destinations[id]
-
+  const destination = destinations[parseInt(params.id)]
+  
   if (!destination) {
     return {
-      title: 'Destination Not Found | Global Food Prints',
-      description: 'The requested destination could not be found.',
+      title: 'Not Found',
+      description: 'The page you are looking for does not exist.'
     }
   }
 
   return {
-    title: `${destination.title} | Global Food Prints Destinations`,
+    title: destination.title,
     description: destination.description,
     openGraph: {
       title: destination.title,
       description: destination.description,
-      images: [destination.image],
-    },
-    twitter: {
-      card: 'summary_large_image',
-      title: destination.title,
-      description: destination.description,
-      images: [destination.image],
-    },
+      images: [destination.image]
+    }
   }
 }
 
-export default async function Destination({ params }: Props) {
-  const id = parseInt(params.id)
-  const destination = destinations[id]
+export default async function DestinationPage({ params }: Props) {
+  const destination = destinations[parseInt(params.id)]
 
   if (!destination) {
     notFound()
