@@ -1,0 +1,19 @@
+{
+  "version": 2,
+  "buildCommand": "npm run build",
+  "outputDirectory": ".next",
+  "framework": "nextjs",
+  "images": {
+    "domains": ["images.unsplash.com"],
+    "sizes": [16, 32, 48, 64, 96, 128, 256, 384],
+    "remotePatterns": [
+      {
+        "protocol": "https",
+        "hostname": "images.unsplash.com"
+      }
+    ]
+  },
+  "env": {
+    "NODE_ENV": "production"
+  }
+} 
